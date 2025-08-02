@@ -1,0 +1,65 @@
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+build-staging:
+  stage: build
+  services:
+    - name: docker:dind
+      command: ["--tls=false"]
+  environment:
+    name: dev
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    HEALTHCHECK_TCP_PORT: 2375
+    REGISTRY_URL: harbor-core.wi.th
+    PROJECT_NAME: cms-api
+    REPOSITORY_NAME: api
+    IMAGE_NAME: $REGISTRY_URL/$PROJECT_NAME/$REPOSITORY_NAME:$CI_COMMIT_REF_SLUG
+    SHA_IMAGE_NAME: $REGISTRY_URL/$PROJECT_NAME/$REPOSITORY_NAME:$CI_COMMIT_SHORT_SHA
+  script:
+    - echo $HARBOR_ROBOT_SECRET | docker login -u $HARBOR_ROBOT_NAME --password-stdin $REGISTRY_URL
+    - docker pull $IMAGE_NAME || true
+    - |
+      docker build --tag $IMAGE_NAME --tag $SHA_IMAGE_NAME .
+    - docker push $IMAGE_NAME
+    - docker push $SHA_IMAGE_NAME
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+deploy-staging:
+  stage: deploy
+  image: alpine/k8s:1.26.14
+  variables:
+    ENV: staging
+    REGISTRY_URL: harbor-core.wi.th
+    PROJECT_NAME: cms
+    REPOSITORY_NAME: api
+    SHA_IMAGE_NAME: $REGISTRY_URL/$PROJECT_NAME/$REPOSITORY_NAME:$CI_COMMIT_SHORT_SHA
+  before_script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - ssh-add <(cat $REPO_PRIVATE_KEY)
+    - ssh-keyscan -p 12222 -H git.wi.th  >> ~/.ssh/known_hosts
+  script:
+    - git clone ssh://git@git.wi.th:12222/cms/manifests.git /tmp/manifests
+    - cd /tmp/manifests/overlays/$ENV
+    - kustomize edit set image cms-api=$SHA_IMAGE_NAME
+    - git config user.name $GITLAB_USER_NAME
+    - git config user.email $GITLAB_USER_EMAIL
+    - git switch main
+    - git add .
+    - git commit -m "Update cms-api image tag to ${CI_COMMIT_SHORT_SHA} (${ENV})" || echo "No changes to commit"
+    - git push origin main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"

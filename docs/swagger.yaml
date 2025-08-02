@@ -1,0 +1,4899 @@
+basePath: /api/v1
+definitions:
+  dto.AppData:
+    properties:
+      id:
+        example: "123"
+        type: string
+      message:
+        example: Hello, World!
+        type: string
+    type: object
+  dto.AuthUserRequest:
+    properties:
+      email:
+        example: johnabc@example.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+    type: object
+  dto.AuthenticateDto:
+    properties:
+      authorization_code:
+        type: string
+    type: object
+  dto.CMSData:
+    properties:
+      id:
+        example: "123"
+        type: string
+      message:
+        example: Hello, World!
+        type: string
+    type: object
+  dto.CMSFaqCategoriesSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      message:
+        example: Category retrieved successfully
+        type: string
+    type: object
+  dto.CMSFaqContentSuccessResponse200:
+    properties:
+      item:
+        $ref: '#/definitions/dto.FaqContentResponse'
+      message:
+        example: Faq content retrieved successfully
+        type: string
+    type: object
+  dto.CMSFaqPageSuccessResponse200:
+    properties:
+      items:
+        $ref: '#/definitions/dto.FaqPageResponse'
+      message:
+        example: Faq page retrieved successfully
+        type: string
+    type: object
+  dto.CMSFaqPagesSuccessResponse200:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/dto.FaqPageResponse'
+        type: array
+      limit:
+        example: 10
+        type: integer
+      message:
+        example: Faq page retrieved successfully
+        type: string
+      page:
+        example: 1
+        type: integer
+      totalCount:
+        example: 100
+        type: integer
+    type: object
+  dto.CMSFaqRevsionsSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.RevisionResponse'
+        type: array
+      message:
+        example: Revisions retrieved successfully
+        type: string
+    type: object
+  dto.CMSFormSubmissionSuccessResponse200:
+    properties:
+      item:
+        $ref: '#/definitions/dto.FormSubmissionResponse'
+      message:
+        example: Form submission retrieved successfully
+        type: string
+    type: object
+  dto.CMSFormSubmissionsSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.FormSubmissionResponse'
+        type: array
+      message:
+        example: Form submission retrieved successfully
+        type: string
+    type: object
+  dto.CMSLandingCategoriesSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      message:
+        example: Category retrieved successfully
+        type: string
+    type: object
+  dto.CMSLandingContentSuccessResponse200:
+    properties:
+      item:
+        $ref: '#/definitions/dto.FaqContentResponse'
+      message:
+        example: Faq content retrieved successfully
+        type: string
+    type: object
+  dto.CMSLandingPageSuccessResponse200:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/dto.FaqPageResponse'
+        type: array
+      limit:
+        example: 10
+        type: integer
+      message:
+        example: Faq page retrieved successfully
+        type: string
+      page:
+        example: 1
+        type: integer
+      totalCount:
+        example: 100
+        type: integer
+    type: object
+  dto.CMSPartnerCategoriesSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      message:
+        example: Category retrieved successfully
+        type: string
+    type: object
+  dto.CMSPartnerContentSuccessResponse200:
+    properties:
+      item:
+        $ref: '#/definitions/dto.PartnerContentResponse'
+      message:
+        example: Partner content retrieved successfully
+        type: string
+    type: object
+  dto.CMSPartnerPageSuccessResponse200:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/dto.PartnerPageResponse'
+        type: array
+      limit:
+        example: 10
+        type: integer
+      message:
+        example: Partner page retrieved successfully
+        type: string
+      page:
+        example: 1
+        type: integer
+      totalCount:
+        example: 100
+        type: integer
+    type: object
+  dto.CMSPartnerRevsionsSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.RevisionResponse'
+        type: array
+      message:
+        example: Revisions retrieved successfully
+        type: string
+    type: object
+  dto.CMSSuccessResponse:
+    properties:
+      error:
+        example: success message here
+        type: string
+    type: object
+  dto.CategoryCreateRequest:
+    properties:
+      category_type_id:
+        type: string
+      description:
+        type: string
+      language_code:
+        allOf:
+        - $ref: '#/definitions/enums.PageLanguage'
+        enum:
+        - th
+        - en
+      name:
+        maxLength: 255
+        minLength: 1
+        type: string
+      publish_status:
+        allOf:
+        - $ref: '#/definitions/enums.PublishStatus'
+        enum:
+        - Published
+        - UnPublished
+      weight:
+        type: integer
+    required:
+    - category_type_id
+    - language_code
+    - name
+    - publish_status
+    type: object
+  dto.CategoryResponse:
+    properties:
+      category_type:
+        allOf:
+        - $ref: '#/definitions/dto.CategoryTypeResponse'
+        description: Optional
+      category_type_id:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      language_code:
+        $ref: '#/definitions/enums.PageLanguage'
+      name:
+        type: string
+      publish_status:
+        $ref: '#/definitions/enums.PublishStatus'
+      updated_at:
+        type: string
+      weight:
+        type: integer
+    type: object
+  dto.CategoryTypeResponse:
+    properties:
+      children_count:
+        additionalProperties:
+          type: integer
+        description: 'e.g., {"th": 2, "en": 1}'
+        type: object
+      created_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        description: OpenAPI บอก nullable
+        type: string
+      type_code:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.CategoryTypeWithDetailsResponse:
+    properties:
+      categories:
+        description: List of Category (Detail) responses for the specified language
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      created_at:
+        type: string
+      id:
+        description: CategoryType ID
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      type_code:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.CategoryUpdateRequest:
+    properties:
+      description:
+        type: string
+      name:
+        description: CategoryTypeID และ LanguageCode โดยทั่วไปจะไม่เปลี่ยนสำหรับ Category
+          (Detail) ที่มีอยู่แล้ว
+        maxLength: 255
+        minLength: 1
+        type: string
+      publish_status:
+        allOf:
+        - $ref: '#/definitions/enums.PublishStatus'
+        enum:
+        - Published
+        - UnPublished
+      weight:
+        type: integer
+    type: object
+  dto.ComponentResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      props:
+        additionalProperties: true
+        type: object
+      type:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.CreateCategoryId:
+    properties:
+      id:
+        type: string
+    type: object
+  dto.CreateCategoryTypeRequest:
+    properties:
+      is_active:
+        description: Default true ใน model
+        type: boolean
+      name:
+        type: string
+      type_code:
+        type: string
+    required:
+    - type_code
+    type: object
+  dto.CreateComponentRequest:
+    properties:
+      props:
+        additionalProperties: true
+        type: object
+      type:
+        type: string
+    type: object
+  dto.CreateEmailCategoryRequest:
+    properties:
+      title:
+        maxLength: 255
+        minLength: 3
+        type: string
+    required:
+    - title
+    type: object
+  dto.CreateEmailContentRequest:
+    properties:
+      bcc_email:
+        type: string
+      cc_email:
+        type: string
+      email_category_id:
+        type: string
+      footer:
+        type: string
+      footer_image_link:
+        maxLength: 255
+        type: string
+      header:
+        type: string
+      label:
+        description: ใช้ rule ทั่วไปก่อน
+        maxLength: 100
+        minLength: 3
+        type: string
+      language:
+        allOf:
+        - $ref: '#/definitions/enums.PageLanguage'
+        enum:
+        - th
+        - en
+      paragraph:
+        type: string
+      send_from_email:
+        type: string
+      send_from_name:
+        maxLength: 100
+        type: string
+      send_to:
+        description: ไม่มี custom validator ก็ใช้ omitempty ไปก่อน
+        type: string
+      subject:
+        maxLength: 255
+        type: string
+      top_img_link:
+        maxLength: 255
+        type: string
+    required:
+    - email_category_id
+    - label
+    - language
+    - send_from_email
+    - subject
+    type: object
+  dto.CreateFaqContentPreviewRequest:
+    properties:
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      publish_on:
+        type: string
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+    type: object
+  dto.CreateFaqContentRequest:
+    properties:
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CreateCategoryId'
+        type: array
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      mode:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.CreateRevisionRequest'
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.CreateFaqPageRequest:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.CreateFaqContentRequest'
+        type: array
+    type: object
+  dto.CreateFormRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      email_category_id:
+        type: string
+      language:
+        enum:
+        - th
+        - en
+        type: string
+      name:
+        maxLength: 255
+        minLength: 1
+        type: string
+      sections:
+        items:
+          $ref: '#/definitions/dto.FormSectionRequest'
+        type: array
+    required:
+    - name
+    type: object
+  dto.CreateFormSubmissionRequest:
+    properties:
+      submitted_data:
+        additionalProperties:
+          type: string
+        type: object
+    type: object
+  dto.CreateLandingContentFileRequest:
+    properties:
+      download_url:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.CreateLandingContentPreviewRequest:
+    properties:
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      files:
+        items:
+          $ref: '#/definitions/dto.CreateLandingContentFileRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      publish_on:
+        type: string
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url_alias:
+        type: string
+    type: object
+  dto.CreateLandingContentRequest:
+    properties:
+      approval_email:
+        items:
+          type: string
+        type: array
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CreateCategoryId'
+        type: array
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      files:
+        items:
+          $ref: '#/definitions/dto.CreateLandingContentFileRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      mode:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.CreateRevisionRequest'
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.CreateLandingPageRequest:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.CreateLandingContentRequest'
+        type: array
+    type: object
+  dto.CreateMetaTagRequest:
+    properties:
+      cover_image:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.CreatePartnerContentPreviewRequest:
+    properties:
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      challenges:
+        type: string
+      company_alt_text:
+        type: string
+      company_detail:
+        type: string
+      company_logo:
+        type: string
+      company_name:
+        type: string
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      lead_body:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      publish_on:
+        type: string
+      results:
+        type: string
+      solutions:
+        type: string
+      thumbnail_alt_text:
+        type: string
+      thumbnail_image:
+        type: string
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+    type: object
+  dto.CreatePartnerContentRequest:
+    properties:
+      approval_email:
+        items:
+          type: string
+        type: array
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CreateCategoryId'
+        type: array
+      challenges:
+        type: string
+      company_alt_text:
+        type: string
+      company_detail:
+        type: string
+      company_logo:
+        type: string
+      company_name:
+        type: string
+      components:
+        items:
+          $ref: '#/definitions/dto.CreateComponentRequest'
+        type: array
+      html_input:
+        type: string
+      language:
+        type: string
+      lead_body:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.CreateMetaTagRequest'
+      mode:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      results:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.CreateRevisionRequest'
+      solutions:
+        type: string
+      thumbnail_alt_text:
+        type: string
+      thumbnail_image:
+        type: string
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.CreatePartnerPageRequest:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.CreatePartnerContentRequest'
+        type: array
+    type: object
+  dto.CreateRevisionRequest:
+    properties:
+      author:
+        type: string
+      description:
+        type: string
+      message:
+        type: string
+      publish_status:
+        type: string
+    type: object
+  dto.EmailCategoryResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.EmailContentResponse:
+    properties:
+      bcc_email:
+        type: string
+      cc_email:
+        type: string
+      created_at:
+        type: string
+      email_category:
+        allOf:
+        - $ref: '#/definitions/dto.EmailCategoryResponse'
+        description: 'Optional: for richer response'
+      email_category_id:
+        type: string
+      footer:
+        type: string
+      footer_image_link:
+        maxLength: 255
+        type: string
+      header:
+        type: string
+      id:
+        type: string
+      label:
+        type: string
+      language:
+        $ref: '#/definitions/enums.PageLanguage'
+      paragraph:
+        type: string
+      send_from_email:
+        type: string
+      send_from_name:
+        maxLength: 100
+        type: string
+      send_to:
+        description: ไม่มี custom validator ก็ใช้ omitempty ไปก่อน
+        type: string
+      subject:
+        maxLength: 255
+        type: string
+      top_img_link:
+        maxLength: 255
+        type: string
+      updated_at:
+        type: string
+    required:
+    - send_from_email
+    - subject
+    type: object
+  dto.ErrorResponse:
+    properties:
+      error:
+        example: Failed to parse user data
+        type: string
+      message:
+        example: Something went wrong
+        type: string
+    type: object
+  dto.ErrorResponse400:
+    properties:
+      error:
+        example: Bad Request
+        type: string
+      message:
+        example: Bad Request
+        type: string
+    type: object
+  dto.ErrorResponse404:
+    properties:
+      error:
+        example: Not Found
+        type: string
+      message:
+        example: Page not found
+        type: string
+    type: object
+  dto.ErrorResponse500:
+    properties:
+      error:
+        example: Internal Server Error
+        type: string
+      message:
+        example: An unexpected error occurred on the server
+        type: string
+    type: object
+  dto.FaqContentResponse:
+    properties:
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      components:
+        items:
+          $ref: '#/definitions/dto.ComponentResponse'
+        type: array
+      created_at:
+        type: string
+      html_input:
+        type: string
+      id:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.MetaTagResponse'
+      mode:
+        type: string
+      page_id:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.RevisionResponse'
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      updated_at:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.FaqContentSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.FaqContentResponse'
+      message:
+        example: Faq content retrieved successfully
+        type: string
+    type: object
+  dto.FaqPageResponse:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.FaqContentResponse'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.FaqPageSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.FaqPageResponse'
+      message:
+        example: Faq page retrieved successfully
+        type: string
+    type: object
+  dto.FormFieldRequest:
+    properties:
+      default_value:
+        maxLength: 1000
+        type: string
+      display:
+        additionalProperties:
+          type: string
+        type: object
+      field_key:
+        maxLength: 100
+        minLength: 1
+        type: string
+      field_type:
+        enum:
+        - text
+        - textarea
+        - select
+        - checkbox
+        - radio
+        - date
+        - time
+        - email
+        - number
+        - file
+        type: string
+      is_required:
+        type: boolean
+      label:
+        maxLength: 255
+        minLength: 1
+        type: string
+      order_index:
+        minimum: 0
+        type: integer
+      placeholder:
+        maxLength: 255
+        type: string
+      properties:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+    - field_key
+    - field_type
+    - is_required
+    - label
+    - order_index
+    type: object
+  dto.FormFieldResponse:
+    properties:
+      default_value:
+        type: string
+      display:
+        additionalProperties:
+          type: string
+        type: object
+      field_key:
+        type: string
+      field_type:
+        type: string
+      id:
+        type: string
+      is_required:
+        type: boolean
+      label:
+        type: string
+      order_index:
+        type: integer
+      placeholder:
+        type: string
+      properties:
+        additionalProperties:
+          type: string
+        type: object
+    type: object
+  dto.FormListItemResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      public_access_url:
+        type: string
+      slug:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.FormResponse:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      email_category_id:
+        type: string
+      id:
+        type: string
+      language:
+        type: string
+      name:
+        type: string
+      public_access_url:
+        type: string
+      sections:
+        items:
+          $ref: '#/definitions/dto.FormSectionResponse'
+        type: array
+      slug:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.FormSectionRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      fields:
+        items:
+          $ref: '#/definitions/dto.FormFieldRequest'
+        type: array
+      order_index:
+        minimum: 0
+        type: integer
+      title:
+        maxLength: 255
+        type: string
+    required:
+    - fields
+    - order_index
+    type: object
+  dto.FormSectionResponse:
+    properties:
+      description:
+        type: string
+      fields:
+        items:
+          $ref: '#/definitions/dto.FormFieldResponse'
+        type: array
+      id:
+        type: string
+      order_index:
+        type: integer
+      title:
+        type: string
+    type: object
+  dto.FormSubmissionResponse:
+    properties:
+      created_at:
+        type: string
+      form:
+        $ref: '#/definitions/dto.FormResponse'
+      form_id:
+        type: string
+      id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_data:
+        additionalProperties: true
+        description: use a map to reflect JSONB object structure
+        type: object
+      submitted_email:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.LandingContentFileResponse:
+    properties:
+      created_at:
+        type: string
+      download_url:
+        type: string
+      id:
+        type: string
+      landing_content_id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.LandingContentResponse:
+    properties:
+      approval_email:
+        items:
+          type: string
+        type: array
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      components:
+        items:
+          $ref: '#/definitions/dto.ComponentResponse'
+        type: array
+      created_at:
+        type: string
+      files:
+        items:
+          $ref: '#/definitions/dto.LandingContentFileResponse'
+        type: array
+      html_input:
+        type: string
+      id:
+        type: string
+      language:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.MetaTagResponse'
+      mode:
+        type: string
+      page_id:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.RevisionResponse'
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      updated_at:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.LandingContentSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.LandingContentResponse'
+      message:
+        example: Landing content retrieved successfully
+        type: string
+    type: object
+  dto.LandingPageResponse:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.LandingContentResponse'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.LandingPageSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.LandingPageResponse'
+      message:
+        example: Landing page retrieved successfully
+        type: string
+    type: object
+  dto.LineTokenResponse:
+    properties:
+      access_token:
+        type: string
+      expires_in:
+        type: integer
+      id_token:
+        type: string
+      refresh_token:
+        type: string
+      scope:
+        type: string
+      token_type:
+        type: string
+    type: object
+  dto.LoginResponse:
+    properties:
+      message:
+        example: Login successful
+        type: string
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  dto.MediaFileListItemResponse:
+    properties:
+      created_at:
+        type: string
+      download_url:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.MediaFileResponse:
+    properties:
+      created_at:
+        type: string
+      download_url:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.MediaFilesListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.MediaFileListItemResponse'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+    type: object
+  dto.MetaTagResponse:
+    properties:
+      cover_image:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.PaginatedFormListResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.FormListItemResponse'
+        type: array
+      meta:
+        $ref: '#/definitions/dto.PaginationMeta'
+    type: object
+  dto.PaginationMeta:
+    properties:
+      current_page:
+        type: integer
+      items_per_page:
+        type: integer
+      total_items:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  dto.PartnerContentResponse:
+    properties:
+      approval_email:
+        items:
+          type: string
+        type: array
+      authored_at:
+        type: string
+      authored_on:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/dto.CategoryResponse'
+        type: array
+      challenges:
+        type: string
+      company_alt_text:
+        type: string
+      company_detail:
+        type: string
+      company_logo:
+        type: string
+      company_name:
+        type: string
+      components:
+        items:
+          $ref: '#/definitions/dto.ComponentResponse'
+        type: array
+      created_at:
+        type: string
+      html_input:
+        type: string
+      id:
+        type: string
+      is_recommended:
+        type: boolean
+      language:
+        type: string
+      lead_body:
+        type: string
+      meta_tag:
+        $ref: '#/definitions/dto.MetaTagResponse'
+      mode:
+        type: string
+      page_id:
+        type: string
+      publish_on:
+        type: string
+      publish_status:
+        type: string
+      results:
+        type: string
+      revision:
+        $ref: '#/definitions/dto.RevisionResponse'
+      solutions:
+        type: string
+      thumbnail_alt_text:
+        type: string
+      thumbnail_image:
+        type: string
+      title:
+        type: string
+      unpublish_on:
+        type: string
+      updated_at:
+        type: string
+      url:
+        type: string
+      url_alias:
+        type: string
+      workflow_status:
+        type: string
+    type: object
+  dto.PartnerContentSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.PartnerContentResponse'
+      message:
+        example: Partner page retrieved successfully
+        type: string
+    type: object
+  dto.PartnerPageResponse:
+    properties:
+      contents:
+        items:
+          $ref: '#/definitions/dto.PartnerContentResponse'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.PartnerPageSuccessResponse200:
+    properties:
+      data:
+        $ref: '#/definitions/dto.PartnerPageResponse'
+      message:
+        example: Partner page retrieved successfully
+        type: string
+    type: object
+  dto.RefreshTokenDto:
+    properties:
+      refresh_token:
+        type: string
+    type: object
+  dto.RegisterResponse:
+    properties:
+      message:
+        example: Register successful
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  dto.RevisionResponse:
+    properties:
+      author:
+        type: string
+      description:
+        type: string
+      faq_content_id:
+        type: string
+      id:
+        type: string
+      landing_content_id:
+        type: string
+      message:
+        type: string
+      partner_content_id:
+        type: string
+      publish_status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.RevsionsSuccessResponse200:
+    properties:
+      item:
+        items:
+          $ref: '#/definitions/dto.RevisionResponse'
+        type: array
+      message:
+        example: Revisions retrieved successfully
+        type: string
+    type: object
+  dto.SendEmailRequest:
+    properties:
+      data:
+        additionalProperties: true
+        description: Placeholders and their values
+        type: object
+      email_category:
+        description: Can be ID (UUID) or unique Title of the category
+        type: string
+      email_content_label:
+        description: Label of the specific email content within the category
+        type: string
+      language:
+        allOf:
+        - $ref: '#/definitions/enums.PageLanguage'
+        description: Language of the email content
+        enum:
+        - th
+        - en
+      to_recipient_emails:
+        items:
+          type: string
+        type: array
+    required:
+    - data
+    - email_category
+    - email_content_label
+    - language
+    type: object
+  dto.SuccessLinkResponse:
+    properties:
+      item:
+        type: string
+      message:
+        example: Success
+        type: string
+    type: object
+  dto.SuccessResponse:
+    properties:
+      message:
+        example: User registered successfully
+        type: string
+    type: object
+  dto.SuccessTokenResponse:
+    properties:
+      item:
+        $ref: '#/definitions/dto.LineTokenResponse'
+      message:
+        example: Success
+        type: string
+    type: object
+  dto.UpdateCategoryTypeRequest:
+    properties:
+      is_active:
+        type: boolean
+      name:
+        type: string
+    type: object
+  dto.UpdateEmailCategoryRequest:
+    properties:
+      title:
+        maxLength: 255
+        minLength: 3
+        type: string
+    type: object
+  dto.UpdateEmailContentRequest:
+    properties:
+      bcc_email:
+        type: string
+      cc_email:
+        type: string
+      footer:
+        type: string
+      footer_image_link:
+        maxLength: 255
+        type: string
+      header:
+        type: string
+      label:
+        maxLength: 100
+        minLength: 3
+        type: string
+      language:
+        allOf:
+        - $ref: '#/definitions/enums.PageLanguage'
+        enum:
+        - th
+        - en
+      paragraph:
+        type: string
+      send_from_email:
+        type: string
+      send_from_name:
+        maxLength: 100
+        type: string
+      send_to:
+        type: string
+      subject:
+        maxLength: 255
+        type: string
+      top_img_link:
+        maxLength: 255
+        type: string
+    type: object
+  dto.UpdateFormFieldRequest:
+    properties:
+      default_value:
+        maxLength: 1000
+        type: string
+      display:
+        additionalProperties:
+          type: string
+        type: object
+      field_key:
+        maxLength: 100
+        minLength: 1
+        type: string
+      field_type:
+        enum:
+        - text
+        - textarea
+        - select
+        - checkbox
+        - radio
+        - date
+        - time
+        - email
+        - number
+        - file
+        type: string
+      is_required:
+        type: boolean
+      label:
+        maxLength: 255
+        minLength: 1
+        type: string
+      order_index:
+        minimum: 0
+        type: integer
+      placeholder:
+        maxLength: 255
+        type: string
+      properties:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+    - field_key
+    - field_type
+    - is_required
+    - label
+    - order_index
+    type: object
+  dto.UpdateFormRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      email_category_id:
+        type: string
+      language:
+        enum:
+        - th
+        - en
+        type: string
+      name:
+        maxLength: 255
+        minLength: 1
+        type: string
+      sections:
+        items:
+          $ref: '#/definitions/dto.UpdateFormSectionRequest'
+        type: array
+    required:
+    - name
+    type: object
+  dto.UpdateFormSectionRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      fields:
+        items:
+          $ref: '#/definitions/dto.UpdateFormFieldRequest'
+        type: array
+      order_index:
+        minimum: 0
+        type: integer
+      title:
+        maxLength: 255
+        type: string
+    required:
+    - fields
+    - order_index
+    type: object
+  enums.PageLanguage:
+    enum:
+    - th
+    - en
+    type: string
+    x-enum-varnames:
+    - PageLanguageTH
+    - PageLanguageEN
+  enums.ProviderType:
+    enum:
+    - normal
+    - line
+    type: string
+    x-enum-varnames:
+    - ProviderNormal
+    - ProviderLine
+  enums.PublishStatus:
+    enum:
+    - UnPublished
+    - Published
+    type: string
+    x-enum-varnames:
+    - PublishStatusNotPublished
+    - PublishStatusPublished
+  models.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      provider:
+        $ref: '#/definitions/enums.ProviderType'
+      updated_at:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: This API supports both Web and admin (CMS) operations, including authentication,
+    page management.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /app/faqpages/{languageCode}/by-alias:
+    get:
+      description: Retrieves a Faq Page by its UrlAlias
+      parameters:
+      - description: Language
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Faq Page UrlAlias
+        in: query
+        name: url_alias
+        required: true
+        type: string
+      - description: Comma-separated list of fields to preload (e.g.revisions, categories,
+          components, metatag). If blank, all fields will be preloaded.
+        in: query
+        name: select
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FaqPageSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Faq Page by UrlAlias
+      tags:
+      - App - Faq Pages
+  /app/faqpages/{languageCode}/by-url:
+    get:
+      description: Retrieves a Faq Page by its Url
+      parameters:
+      - description: Language
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Faq Page Url
+        in: query
+        name: url
+        required: true
+        type: string
+      - description: Comma-separated list of fields to preload (e.g.revisions, categories,
+          components, metatag). If blank, all fields will be preloaded.
+        in: query
+        name: select
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FaqPageSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Faq Page by Url
+      tags:
+      - App - Faq Pages
+  /app/faqpages/previews/{id}:
+    get:
+      description: Retrieves a Faq Content by its id
+      parameters:
+      - description: Content Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.FaqContentSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Faq Content by content id
+      tags:
+      - App - Faq Pages
+  /app/forms/{formId}/structure:
+    get:
+      description: Retrieves a specific form structure by its UUID, including sections
+        and fields.
+      parameters:
+      - description: Form Structure ID (UUID)
+        in: path
+        name: formId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Details of the form structure
+          schema:
+            $ref: '#/definitions/dto.FormResponse'
+        "400":
+          description: Bad Request - Invalid Form ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found - Form structure not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Form Structure by ID
+      tags:
+      - App - Forms
+  /app/landingpages/{languageCode}/by-alias:
+    get:
+      description: Retrieves a Landing Page by its UrlAlias
+      parameters:
+      - description: Language
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Landing Page UrlAlias
+        in: query
+        name: url_alias
+        required: true
+        type: string
+      - description: Comma-separated list of fields to preload (e.g. files, revisions,
+          categories, components, metatag). If blank, all fields will be preloaded.
+        in: query
+        name: select
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LandingPageSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Landing Page by UrlAlias
+      tags:
+      - App - Landing Pages
+  /app/landingpages/previews/{id}:
+    get:
+      description: Retrieves a Landing Content by its id
+      parameters:
+      - description: Content Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LandingContentSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Landing Content by content id
+      tags:
+      - App - Landing Pages
+  /app/partnerpages/{languageCode}/by-alias:
+    get:
+      description: Retrieves a Partner Page by its UrlAlias
+      parameters:
+      - description: Language
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Partner Page UrlAlias
+        in: query
+        name: url_alias
+        required: true
+        type: string
+      - description: Comma-separated list of fields to preload (e.g. page, files,
+          components, revisions, metatag)
+        in: query
+        name: select
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PartnerPageSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page by UrlAlias
+      tags:
+      - App - Partner Pages
+  /app/partnerpages/{languageCode}/by-url:
+    get:
+      description: Retrieves a Partner Page by its UrlAlias
+      parameters:
+      - description: Language
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Partner Page Url
+        in: query
+        name: url
+        required: true
+        type: string
+      - description: Comma-separated list of fields to preload (e.g. page, files,
+          components, revisions, metatag)
+        in: query
+        name: select
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PartnerPageSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page by UrlAlias
+      tags:
+      - App - Partner Pages
+  /app/partnerpages/previews/{id}:
+    get:
+      description: Retrieves a Partner Content by its id
+      parameters:
+      - description: Content Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PartnerContentSuccessResponse200'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Content by content id
+      tags:
+      - App - Partner Pages
+  /app/test:
+    get:
+      description: Returns test data from App repository
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/dto.AppData'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Test app endpoint
+      tags:
+      - App
+  /cms/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Logs in a user and returns a JWT token
+      parameters:
+      - description: User
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Login
+      tags:
+      - CMS - Email Login
+  /cms/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Registers a new user
+      parameters:
+      - description: User
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Register
+      tags:
+      - CMS - Email Login
+  /cms/categories:
+    get:
+      description: Lists all category details, optionally filtered by category_type_id,
+        language, name, or publish_status.
+      parameters:
+      - description: Filter by CategoryType ID (UUID)
+        in: query
+        name: category_type_id
+        type: string
+      - description: Filter by language (th, en)
+        enum:
+        - th
+        - en
+        in: query
+        name: lang
+        type: string
+      - description: Filter by name (partial match)
+        in: query
+        name: name
+        type: string
+      - description: Filter by publish status (Published, Unpublished)
+        enum:
+        - Published
+        - Unpublished
+        in: query
+        name: publish_status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.CategoryResponse'
+            type: array
+        "400":
+          description: Invalid filter parameters
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Categories (Details)
+      tags:
+      - CMS - Categories
+    post:
+      consumes:
+      - application/json
+      description: Creates a new category detail item.
+      parameters:
+      - description: Category (Detail) Data
+        in: body
+        name: category_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CategoryCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CategoryResponse'
+        "400":
+          description: Validation Error or Bad Request (e.g., invalid category_type_id)
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category Type not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Category with this name, language, and type already
+            exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create Category (Detail)
+      tags:
+      - CMS - Categories
+  /cms/categories/{categoryUuid}:
+    delete:
+      description: Deletes a specific category detail by its UUID.
+      parameters:
+      - description: Category (Detail) UUID
+        in: path
+        name: categoryUuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid UUID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Delete Category (Detail)
+      tags:
+      - CMS - Categories
+    get:
+      description: Retrieves a specific category detail by its UUID.
+      parameters:
+      - description: Category (Detail) UUID
+        in: path
+        name: categoryUuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategoryResponse'
+        "400":
+          description: Invalid UUID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Category (Detail) by UUID
+      tags:
+      - CMS - Categories
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing category detail by its UUID.
+      parameters:
+      - description: Category (Detail) UUID
+        in: path
+        name: categoryUuid
+        required: true
+        type: string
+      - description: Category (Detail) Update Data
+        in: body
+        name: category_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CategoryUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategoryResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Category with this name, language, and type already
+            exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update Category (Detail)
+      tags:
+      - CMS - Categories
+  /cms/category-types:
+    get:
+      description: Lists all category types, optionally filtered by isActive status.
+        Includes count of categories per language.
+      parameters:
+      - description: Filter by active status
+        in: query
+        name: isActive
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.CategoryTypeResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Category Types
+      tags:
+      - CMS - Category Types
+    post:
+      consumes:
+      - application/json
+      description: Creates a new category type
+      parameters:
+      - description: Category Type Data
+        in: body
+        name: category_type_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateCategoryTypeRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CategoryTypeResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - TypeCode already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create Category Type
+      tags:
+      - CMS - Category Types
+  /cms/category-types/{categoryTypeId}/categories:
+    get:
+      description: Retrieves all categories (details) associated with a specific category
+        type, filtered by language.
+      parameters:
+      - description: Category Type ID (UUID)
+        in: path
+        name: categoryTypeId
+        required: true
+        type: string
+      - description: Language code (th or en)
+        enum:
+        - th
+        - en
+        in: query
+        name: lang
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategoryTypeWithDetailsResponse'
+        "400":
+          description: Invalid ID or language format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category type not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Categories for a Specific Type
+      tags:
+      - CMS - Category Types
+  /cms/category-types/{id}:
+    delete:
+      description: Deletes a category type by its ID. Fails if categories are associated
+        with it.
+      parameters:
+      - description: Category Type ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category type not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Category type in use
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Delete Category Type
+      tags:
+      - CMS - Category Types
+    get:
+      description: Retrieves a specific category type by its ID, including count of
+        categories per language.
+      parameters:
+      - description: Category Type ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategoryTypeResponse'
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category type not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Category Type by ID
+      tags:
+      - CMS - Category Types
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing category type by its ID.
+      parameters:
+      - description: Category Type ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Category Type Update Data
+        in: body
+        name: category_type_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateCategoryTypeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CategoryTypeResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category type not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - TypeCode already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update Category Type
+      tags:
+      - CMS - Category Types
+  /cms/email-categories:
+    get:
+      description: Retrieves a list of all email categories.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.EmailCategoryResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Email Categories
+      tags:
+      - CMS - Email Management
+    post:
+      consumes:
+      - application/json
+      description: Creates a new email category.
+      parameters:
+      - description: Email Category Data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateEmailCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.EmailCategoryResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Title already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create Email Category
+      tags:
+      - CMS - Email Management
+  /cms/email-categories/{id}:
+    delete:
+      description: Deletes an email category by its UUID, if not in use.
+      parameters:
+      - description: Email Category ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Category in use
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Delete Email Category
+      tags:
+      - CMS - Email Management
+    get:
+      description: Retrieves a specific email category by its UUID.
+      parameters:
+      - description: Email Category ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.EmailCategoryResponse'
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Email Category
+      tags:
+      - CMS - Email Management
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing email category by its UUID.
+      parameters:
+      - description: Email Category ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Email Category Update Data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateEmailCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.EmailCategoryResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Title already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update Email Category
+      tags:
+      - CMS - Email Management
+  /cms/email-contents:
+    get:
+      description: Retrieves a list of email contents, can be filtered by category_id,
+        language, or label.
+      parameters:
+      - description: Filter by Email Category ID (UUID)
+        in: query
+        name: email_category_id
+        type: string
+      - description: Filter by language (th, en)
+        enum:
+        - th
+        - en
+        in: query
+        name: language
+        type: string
+      - description: Filter by label (e.g., customer-welcome)
+        in: query
+        name: label
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.EmailContentResponse'
+            type: array
+        "400":
+          description: Invalid filter parameters
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Email Contents
+      tags:
+      - CMS - Email Management
+    post:
+      consumes:
+      - application/json
+      description: Creates a new email content associated with an email category.
+      parameters:
+      - description: Email Content Data
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateEmailContentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.EmailContentResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Email Category not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Content with this category, language, and label
+            already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create Email Content
+      tags:
+      - CMS - Email Management
+  /cms/email-contents/{id}:
+    delete:
+      description: Deletes an email content by its UUID.
+      parameters:
+      - description: Email Content ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Content not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Delete Email Content
+      tags:
+      - CMS - Email Management
+    get:
+      description: Retrieves a specific email content by its UUID.
+      parameters:
+      - description: Email Content ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.EmailContentResponse'
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Content not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Email Content
+      tags:
+      - CMS - Email Management
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing email content by its UUID.
+      parameters:
+      - description: Email Content ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Email Content Update Data
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateEmailContentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.EmailContentResponse'
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Content not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Another content with this category, language, and
+            label already exists
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Update Email Content
+      tags:
+      - CMS - Email Management
+  /cms/email-contents/category/{email_category_id}/language/{language}:
+    get:
+      description: Retrieves email contents for a specific category and language.
+      parameters:
+      - description: Email Category ID (UUID)
+        in: path
+        name: email_category_id
+        required: true
+        type: string
+      - description: Language (th, en)
+        in: path
+        name: language
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.EmailContentResponse'
+            type: array
+        "400":
+          description: Invalid parameters
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Category not found or no contents available
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Email Content by Category and Language
+      tags:
+      - CMS - Email Management
+  /cms/faqpages:
+    get:
+      description: Retrieve a list of FAQ pages with optional filtering, sorting,
+        pagination, and language selection.
+      parameters:
+      - description: Filter criteria (URL-encoded JSON string), e.g., category_faq
+          and category_keywords
+        in: query
+        name: query
+        type: string
+      - description: Sorting fields, e.g., 'title:asc,updated_at:desc'
+        in: query
+        name: sort
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      - description: Language code for localized content (e.g., en, th)
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqPagesSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: List FAQ Pages
+      tags:
+      - CMS - Faq Pages
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Create a new FAQ page with optional components such as categories, components, and metatag.
+        The request must include exactly one content block.
+        A valid revision must be included in the request other parts are optional.
+      parameters:
+      - description: 'FAQ Page payload (optional: categories, components)'
+        in: body
+        name: faq_page_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateFaqPageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Create a New FAQ Page
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{contentId}/contents:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Update an existing FAQ content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+        A valid revision must be included in the request.
+      parameters:
+      - description: FAQ Content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Updated FAQ Content
+        in: body
+        name: faqContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateFaqContentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Update FAQ Content
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{pageId}:
+    delete:
+      description: Delete an existing FAQ page using its unique identifier.
+      parameters:
+      - description: FAQ Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete FAQ Page
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{pageId}/contents/{languageCode}:
+    delete:
+      description: Delete the content of a specific FAQ page using its unique identifier,
+        language code, and mode.
+      parameters:
+      - description: FAQ Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete FAQ Page Content
+      tags:
+      - CMS - Faq Pages
+    get:
+      description: Retrieve the content of a specific FAQ page by its unique identifier
+        and language code.
+      parameters:
+      - description: FAQ Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get FAQ Page Content
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{pageId}/latestcontent/{languageCode}:
+    get:
+      description: Retrieve the latest content for FAQ page.
+      parameters:
+      - description: FAQ Page ID (UUID format)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Latest FAQ Page Content
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{pageid}:
+    get:
+      description: Retrieve a specific FAQ page using its unique identifier.
+      parameters:
+      - description: FAQ Page ID
+        in: path
+        name: pageid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get FAQ Page by ID
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/{revisionId}/revisions:
+    post:
+      consumes:
+      - application/json
+      description: Revert FAQ content using a specific revision ID.
+      parameters:
+      - description: Revision ID (UUID)
+        in: path
+        name: revisionId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Revert FAQ Page Content
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/category/{categoryTypeCode}/{pageId}/{languageCode}:
+    get:
+      description: Retrieve the categories of a specific FAQ page using its unique
+        identifier, category type code, language code, and mode.
+      parameters:
+      - description: FAQ Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Category Type Code
+        in: path
+        name: categoryTypeCode
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqCategoriesSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get FAQ Page Categories
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/duplicate/{contentId}/contents:
+    post:
+      consumes:
+      - application/json
+      description: Duplicate an existing FAQ content using its unique identifier and
+      parameters:
+      - description: FAQ content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate FAQ Content to another language
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/duplicate/{pageId}/pages:
+    post:
+      description: Duplicate an existing FAQ page using its unique identifier and.
+      parameters:
+      - description: FAQ Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate FAQ Page
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/previews/{pageId}:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Preview an existing FAQ content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+      parameters:
+      - description: FAQ Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Preview FAQ Content
+        in: body
+        name: faqContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateFaqContentPreviewRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Preview FAQ Content
+      tags:
+      - CMS - Faq Pages
+  /cms/faqpages/revisions/{languageCode}/{pageId}:
+    get:
+      description: Retrieve a list of revisions for a specific FAQ page based on its
+        unique identifier and language code. Each revision includes metadata such
+        as author, status, and timestamps.
+      parameters:
+      - description: FAQ Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFaqRevsionsSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get FAQ Page Revisions
+      tags:
+      - CMS - Faq Pages
+  /cms/forms:
+    get:
+      description: Retrieves a list of all form templates with pagination and filtering.
+      parameters:
+      - description: Filter by form name (partial match)
+        in: query
+        name: name
+        type: string
+      - description: Filter by creator User ID (UUID)
+        in: query
+        name: created_by_user_id
+        type: string
+      - description: Filter by creation date (YYYY-MM-DD)
+        in: query
+        name: created_at
+        type: string
+      - description: 'Page number for pagination (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Number of items per page (default: 10, max: 100)'
+        in: query
+        name: items_per_page
+        type: integer
+      - description: Sort by field (e.g., name, created_at, updated_at)
+        enum:
+        - name
+        - created_at
+        - updated_at
+        in: query
+        name: sort_by
+        type: string
+      - description: Sort order (asc, desc)
+        enum:
+        - asc
+        - desc
+        in: query
+        name: sort_order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of form templates
+          schema:
+            $ref: '#/definitions/dto.PaginatedFormListResponse'
+        "400":
+          description: Bad Request - Invalid query parameters
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Form Templates
+      tags:
+      - CMS - Forms
+    post:
+      consumes:
+      - application/json
+      description: Creates a new Form Template with its sections and fields.
+      parameters:
+      - description: Form Template Data
+        in: body
+        name: form_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateFormRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Successfully created form template
+          schema:
+            $ref: '#/definitions/dto.FormResponse'
+        "400":
+          description: Bad Request - Validation error or invalid input
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create Form Template
+      tags:
+      - CMS - Forms
+  /cms/forms/{formId}:
+    delete:
+      description: Deletes a specific form template by its UUID (soft delete).
+      parameters:
+      - description: Form Template ID (UUID)
+        in: path
+        name: formId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content - Form template deleted successfully
+        "400":
+          description: Bad Request - Invalid Form ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found - Form template not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "409":
+          description: Conflict - Cannot delete form (e.g., has submissions and ON
+            DELETE RESTRICT)
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete Form Template
+      tags:
+      - CMS - Forms
+    get:
+      description: Retrieves a specific form template by its UUID, including sections
+        and fields.
+      parameters:
+      - description: Form Template ID (UUID)
+        in: path
+        name: formId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Details of the form template
+          schema:
+            $ref: '#/definitions/dto.FormResponse'
+        "400":
+          description: Bad Request - Invalid Form ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found - Form template not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Form Template by ID
+      tags:
+      - CMS - Forms
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing Form Template, including its sections and fields.
+      parameters:
+      - description: Form Template ID (UUID)
+        in: path
+        name: formId
+        required: true
+        type: string
+      - description: Updated Form Template Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateFormRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully updated form template
+          schema:
+            $ref: '#/definitions/dto.FormResponse'
+        "400":
+          description: Bad Request - Validation error or invalid input
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found - Form template not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Form Template
+      tags:
+      - CMS - Forms
+  /cms/forms/{formId}/submissions:
+    get:
+      description: Get form submissions with optional components such as categories,
+        components, and metatag.
+      parameters:
+      - description: Form ID
+        in: path
+        name: formId
+        required: true
+        type: string
+      - description: Sorting fields, e.g., 'title:asc,updated_at:desc'
+        in: query
+        name: sort
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFormSubmissionsSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      security:
+      - BearerAuth: []
+      summary: List Submissions
+      tags:
+      - CMS - Form Submissions
+    post:
+      consumes:
+      - application/json
+      description: Create a new form submission with optional components such as categories,
+        components, and metatag.
+      parameters:
+      - description: Form ID
+        in: path
+        name: formId
+        required: true
+        type: string
+      - description: Form Submission payload
+        in: body
+        name: form_submission_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateFormSubmissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFormSubmissionSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      security:
+      - BearerAuth: []
+      summary: Create a New Form Submission
+      tags:
+      - CMS - Form Submissions
+  /cms/forms/submissions/{submissionId}:
+    get:
+      description: Retrieve a specific form submission using its unique identifier.
+      parameters:
+      - description: Form Submission ID
+        in: path
+        name: submissionId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSFormSubmissionSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      security:
+      - BearerAuth: []
+      summary: Get Form Submission
+      tags:
+      - CMS - Form Submissions
+  /cms/landingpages:
+    get:
+      description: Retrieve a list of Landing pages with optional filtering, sorting,
+        pagination, and language selection.
+      parameters:
+      - description: Filter criteria (URL-encoded JSON string), e.g., category_Landing
+          and category_keywords
+        in: query
+        name: query
+        type: string
+      - description: Sorting fields, e.g., 'title:asc,updated_at:desc'
+        in: query
+        name: sort
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      - description: Language code for localized content (e.g., en, th)
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: List Landing Pages
+      tags:
+      - CMS - Landing Pages
+    post:
+      consumes:
+      - application/json
+      description: Create a new Landing page with optional components such as categories,
+        revisions, and content blocks.
+      parameters:
+      - description: 'Landing Page payload (optional: categories, components)'
+        in: body
+        name: Landing_page_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateLandingPageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Create a New Landing Page
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{contentId}/contents:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Update an existing Landing content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+        A valid revision must be included in the request.
+      parameters:
+      - description: Landing Content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Updated Landing Content
+        in: body
+        name: landingContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateLandingContentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Update Landing Content
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{pageId}:
+    delete:
+      description: Delete an existing Landing page using its unique identifier.
+      parameters:
+      - description: Landing Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete Landing Page
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{pageId}/contents/{languageCode}:
+    delete:
+      description: Delete the content of a specific Landing page using its unique
+        identifier, language code, and mode.
+      parameters:
+      - description: Landing Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete Landing Page Content
+      tags:
+      - CMS - Landing Pages
+    get:
+      description: Retrieve the content of a specific Landing page by its unique identifier
+        and language code.
+      parameters:
+      - description: Landing Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Landing Page Content
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{pageId}/latestcontents/{languageCode}:
+    get:
+      description: Retrieve the latest content for landing page.
+      parameters:
+      - description: landing Page ID (UUID format)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Latest landing Page Content
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{pageid}:
+    get:
+      description: Retrieve a specific Landing page using its unique identifier.
+      parameters:
+      - description: Landing Page ID
+        in: path
+        name: pageid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Landing Page by ID
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/{revisionId}/revisions:
+    post:
+      consumes:
+      - application/json
+      description: Revert Landing content using a specific revision ID.
+      parameters:
+      - description: Revision ID (UUID)
+        in: path
+        name: revisionId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Revert Landing Page Content
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/category/{categoryTypeCode}/{pageId}/{languageCode}:
+    get:
+      description: Retrieve the categories of a specific Landing page using its unique
+        identifier, category type code, language code, and mode.
+      parameters:
+      - description: Landing Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Category Type Code
+        in: path
+        name: categoryTypeCode
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingCategoriesSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Landing Page Categories
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/duplicate/{contentId}/contents:
+    post:
+      consumes:
+      - application/json
+      description: Duplicate an existing Landing content using its unique identifier
+        and
+      parameters:
+      - description: Landing content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate Landing Content to another language
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/duplicate/{pageId}:
+    post:
+      description: Duplicate an existing Landing page using its unique identifier
+        and language code.
+      parameters:
+      - description: Landing Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate Landing Page
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/previews/{pageId}:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Preview an existing Landing content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+      parameters:
+      - description: Landing Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Preview Landing Content
+        in: body
+        name: landingContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateLandingContentPreviewRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSLandingContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Preview Landing Content
+      tags:
+      - CMS - Landing Pages
+  /cms/landingpages/revisions/{languageCode}/{pageId}:
+    get:
+      description: Retrieve a list of revisions for a specific landing page based
+        on its unique identifier and language code. Each revision includes metadata
+        such as author, status, and timestamps.
+      parameters:
+      - description: landing Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.RevsionsSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get landing Page Revisions
+      tags:
+      - CMS - Landing Pages
+  /cms/media-files:
+    get:
+      description: Retrieves a paginated list of media files, with optional search
+        by name and sorting.
+      parameters:
+      - description: Search term for file name
+        in: query
+        name: search
+        type: string
+      - description: 'Page number (default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Items per page (default: 20, max: 100)'
+        in: query
+        name: pageSize
+        type: integer
+      - description: 'Sort by ''name'' or ''created_at'' (default: ''created_at'')'
+        enum:
+        - name
+        - created_at
+        in: query
+        name: sortBy
+        type: string
+      - description: 'Sort order ''asc'' or ''desc'' (default: ''desc'')'
+        enum:
+        - asc
+        - desc
+        in: query
+        name: order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.MediaFilesListResponse'
+        "400":
+          description: Invalid query parameters
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: List Media Files
+      tags:
+      - CMS - Media Files
+    post:
+      consumes:
+      - multipart/form-data
+      description: Uploads a new media file (image, pdf, svg).
+      parameters:
+      - description: The file to upload (jpg, png, webp, svg, pdf)
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Optional sub-directory path for the file
+        in: formData
+        name: path
+        type: string
+      - description: 'Optional. If true, replaces existing file with the same name
+          and path. Default: false.'
+        in: formData
+        name: replace
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: File uploaded successfully
+          schema:
+            $ref: '#/definitions/dto.MediaFileResponse'
+        "400":
+          description: Bad Request (e.g., no file, invalid file type, invalid path)
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Upload Media File
+      tags:
+      - CMS - Media Files
+  /cms/media-files/{id}:
+    delete:
+      description: Deletes a media file by its UUID from both the database and the
+        disk.
+      parameters:
+      - description: Media File ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content - File deleted successfully
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Media file not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error (e.g., failed to delete file from disk
+            or DB)
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Delete Media File
+      tags:
+      - CMS - Media Files
+    get:
+      description: Retrieves details for a specific media file by its UUID.
+      parameters:
+      - description: Media File ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.MediaFileResponse'
+        "400":
+          description: Invalid ID format
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Media file not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get Media File by ID
+      tags:
+      - CMS - Media Files
+  /cms/partnerpages:
+    get:
+      description: Retrieve a list of Partner pages with optional filtering, sorting,
+        pagination, and language selection.
+      parameters:
+      - description: Filter criteria (URL-encoded JSON string), e.g., category_Partner
+          and category_keywords
+        in: query
+        name: query
+        type: string
+      - description: Sorting fields, e.g., 'title:asc,updated_at:desc'
+        in: query
+        name: sort
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      - description: Language code for localized content (e.g., en, th)
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: List Partner Pages
+      tags:
+      - CMS - Partner Pages
+    post:
+      consumes:
+      - application/json
+      description: Create a new Partner page with optional components such as categories,
+        revisions, and content blocks.
+      parameters:
+      - description: 'Partner Page payload (optional: categories, components)'
+        in: body
+        name: Partner_page_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePartnerPageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Create a New Partner Page
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{contentId}/contents:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Update an existing Partner content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+        A valid revision must be included in the request.
+      parameters:
+      - description: Partner Content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Updated Partner Content
+        in: body
+        name: partnerContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePartnerContentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Update Partner Content
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{pageId}:
+    delete:
+      description: Delete an existing Partner page using its unique identifier.
+      parameters:
+      - description: Partner Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete Partner Page
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{pageId}/contents/{languageCode}:
+    delete:
+      description: Delete the content of a specific Partner page using its unique
+        identifier, language code, and mode.
+      parameters:
+      - description: Partner Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Delete Partner Page Content
+      tags:
+      - CMS - Partner Pages
+    get:
+      description: Retrieve the content of a specific Partner page by its unique identifier
+        and language code.
+      parameters:
+      - description: Partner Page ID
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page Content
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{pageId}/latestcontent/{languageCode}:
+    get:
+      description: Retrieve the latest content for Partner page.
+      parameters:
+      - description: Partner Page ID (UUID format)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Latest Partner Page Content
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{pageid}:
+    get:
+      description: Retrieve a specific Partner page using its unique identifier.
+      parameters:
+      - description: Partner Page ID
+        in: path
+        name: pageid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerPageSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page by ID
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/{revisionId}/revisions:
+    post:
+      consumes:
+      - application/json
+      description: Revert Partner content using a specific revision ID.
+      parameters:
+      - description: Revision ID (UUID)
+        in: path
+        name: revisionId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Revert Partner Page Content
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/category/{categoryTypeCode}/{pageId}/{languageCode}:
+    get:
+      description: Retrieve the categories of a specific Partner page using its unique
+        identifier, category type code, language code, and mode.
+      parameters:
+      - description: Partner Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Category Type Code
+        in: path
+        name: categoryTypeCode
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      - description: Mode (e.g., draft, published, histories, preview). Defaults to
+          'published'.
+        in: query
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerCategoriesSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page Categories
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/duplicate/{contentId}/contents:
+    post:
+      consumes:
+      - application/json
+      description: Duplicate an existing Partner content using its unique identifier
+        and
+      parameters:
+      - description: Partner content ID (UUID)
+        in: path
+        name: contentId
+        required: true
+        type: string
+      - description: Revision payload
+        in: body
+        name: revision
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateRevisionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate Partner Content to another language
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/duplicate/{pageId}:
+    post:
+      description: Duplicate an existing Partner page using its unique identifier
+        and language code.
+      parameters:
+      - description: Partner Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Duplicate Partner Page
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/previews/{pageId}:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Preview an existing Partner content by its content ID.
+        This operation does not merge with previous content — it overwrites everything.
+      parameters:
+      - description: Partner Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Preview Partner Content
+        in: body
+        name: partnerContent
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePartnerContentPreviewRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerContentSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Preview Partner Content
+      tags:
+      - CMS - Partner Pages
+  /cms/partnerpages/revisions/{languageCode}/{pageId}:
+    get:
+      description: Retrieve a list of revisions for a specific Partner page based
+        on its unique identifier and language code. Each revision includes metadata
+        such as author, status, and timestamps.
+      parameters:
+      - description: Partner Page ID (UUID)
+        in: path
+        name: pageId
+        required: true
+        type: string
+      - description: Language Code (e.g., en, th)
+        in: path
+        name: languageCode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CMSPartnerRevsionsSuccessResponse200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse400'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Get Partner Page Revisions
+      tags:
+      - CMS - Partner Pages
+  /cms/test:
+    get:
+      description: Returns test data from CMS repository
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/dto.CMSData'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Test cms endpoint
+      tags:
+      - CMS
+  /common/authenticate:
+    post:
+      consumes:
+      - application/json
+      description: Accepts authentication data and returns a LINE login URL for OAuth
+        2.0 authentication.
+      parameters:
+      - description: Authentication payload
+        in: body
+        name: authenticate_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthenticateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully generated login link
+          schema:
+            $ref: '#/definitions/dto.SuccessTokenResponse'
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Initiate LINE Authentication
+      tags:
+      - Common - Line Login
+  /common/login-link:
+    get:
+      description: Returns a LINE OAuth 2.0 login URL for redirect-based authentication.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SuccessLinkResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Generate LINE Login Link
+      tags:
+      - Common - Line Login
+  /common/refresh-token:
+    post:
+      consumes:
+      - application/json
+      description: Accepts a refresh token and returns new access and refresh tokens
+        for LINE OAuth 2.0.
+      parameters:
+      - description: Refresh token payload
+        in: body
+        name: refresh_toke_data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RefreshTokenDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully refresh
+          schema:
+            $ref: '#/definitions/dto.SuccessTokenResponse'
+        "400":
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      summary: Refresh LINE Authentication Token
+      tags:
+      - Common - Line Login
+  /emails/send:
+    post:
+      consumes:
+      - application/json
+      description: Sends an email using a pre-configured template identified by category,
+        label, and language.
+      parameters:
+      - description: Email Sending Request
+        in: body
+        name: emailRequest
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SendEmailRequest'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted - Email queued for sending
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Validation Error or Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Email category or content template not found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error or Email Sending Failed
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Send Email
+      tags:
+      - Email Sending
+  /middleware/test/line:
+    get:
+      description: TEST
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      security:
+      - BearerAuth: []
+      summary: TEST
+      tags:
+      - test
+  /middleware/test/normal:
+    get:
+      description: TEST
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse500'
+      security:
+      - BearerAuth: []
+      summary: TEST
+      tags:
+      - test
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

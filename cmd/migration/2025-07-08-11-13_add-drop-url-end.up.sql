@@ -1,0 +1,2 @@
+ALTER TABLE forms
+DROP COLUMN IF EXISTS url_send;

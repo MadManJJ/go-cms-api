@@ -1,0 +1,30 @@
+package errs
+
+import "errors"
+
+var (
+	ErrInvalidCredentials            = errors.New("invalid credentials")
+	ErrNotFound                      = errors.New("not found")
+	ErrInternalServerError           = errors.New("internal server error")
+	ErrBadRequest                    = errors.New("bad request")
+	ErrDuplicateUrlAlias             = errors.New("duplicate URL alias")
+	ErrInvalidEmailFormat            = errors.New("invalid email format")
+	ErrInvalidUUIDFormat             = errors.New("invalid UUID format")
+	ErrLandingPageNotFound           = errors.New("landing page not found")
+	ErrLanguageAlreadyExists         = errors.New("language already exists")
+	ErrCannotDeleteLastLanguage      = errors.New("cannot delete the last language, at least one language must remain")
+	ErrInvalidLanguageCode           = errors.New("invalid language code")
+	ErrInvalidMode                   = errors.New("invalid mode")
+	ErrInvalidWorkflowStatus         = errors.New("invalid workflow status")
+	ErrInvalidPublishStatus          = errors.New("invalid publish status")
+	ErrLandingContentNotFound        = errors.New("landing content not found")
+	ErrSourceLanguageContentNotFound = errors.New("source language content not found")
+	ErrRevisionNotFound              = errors.New("revision not found")
+	ErrInvalidQuery                  = errors.New("invalud raw query")
+	ErrNoNewContentToDuplicate       = errors.New("no content to duplicate")
+	ErrTooMuchContent                = errors.New("too much content")
+	ErrMissingContent                = errors.New("missing content")
+	ErrNoRevisionFound               = errors.New("no revision found")
+	ErrDuplicateURL                  = errors.New("duplicate URL")
+	ErrInvalidUrlAlias               = errors.New("invalid URL alias")
+)
