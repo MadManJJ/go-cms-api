@@ -298,7 +298,7 @@ The application uses environment variables for configuration. A `.env.example` f
 1. Clone the repository
 
 ```bash
-git clone https://git.wi.th/github.com/MadManJJ/cms-api.git
+git clone https://github.com/MadManJJ/go-cms-api.git
 cd api
 ```
 
@@ -329,7 +329,7 @@ Expected output: `OK`
 
 ```
 cd existing_repo
-git remote add origin https://git.wi.th/github.com/MadManJJ/cms-api.git
+git remote add origin https://github.com/MadManJJ/go-cms-api.git
 git branch -M main
 git push -uf origin main
 ```
